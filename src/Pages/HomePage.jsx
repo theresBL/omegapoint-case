@@ -1,12 +1,13 @@
-import { MoviesList } from '../Components/MoviesList'
 import styled from 'styled-components'
+import { Page } from '../Components/ReusableStyles/Page'
 
 export const HomePage = () => {
   return (
-    <HomePageContainer>
-      <h2>Recent releases</h2>
-      <MoviesList />
-    </HomePageContainer>
+    <Page>
+      <HomePageContainer>
+        <h1>Home Page</h1>
+      </HomePageContainer>
+    </Page>
   )
 }
 
