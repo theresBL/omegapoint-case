@@ -37,7 +37,6 @@ const SearchForm = ({ onSearch }) => {
 }
 
 const Form = styled.form`
-  border: solid blue 1px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,6 +52,10 @@ const Input = styled.input`
 border: none;
 border-radius: 1rem;
 padding: 4px 8px;
+
+@media (min-width: 1024px) {
+    font-size: 2rem;
+  }
 `
 
 const SearchButton = styled.button`
@@ -63,6 +66,10 @@ padding: 4px 8px;
 &:hover {
   filter: brightness(50%);
 }
+
+@media (min-width: 1024px) {
+    font-size: 2rem;
+  }
   
 `
 
@@ -167,4 +174,8 @@ const TextDiv = styled.div`
   gap: 1rem;
   padding: 10px;
   max-width: 300px;
+
+  @media (min-width: 1024px) {
+    max-width: 500px;
+  }
 `

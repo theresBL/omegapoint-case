@@ -7,7 +7,7 @@ export const Loading = () => {
     loop: true,
     autoplay: true,
     animationData: loader,
-  };
+  }
 
   return (
     <LoadingDiv>
@@ -17,7 +17,7 @@ export const Loading = () => {
         width={150}
       />
     </LoadingDiv>
-  );
+  )
 }
 
 
@@ -26,4 +26,5 @@ display: flex;
 align-items: center;
 justify-content: center;
 width: 100vw;
+border: 1px solid blue;
 `
