@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 import { Loading } from '../Components/Loading'
+import { Page } from '../Components/ReusableStyles/Page'
 
 const MOVIEDETAILS_URL = (movie_id) => `${import.meta.env.VITE_BASE_MOVIEDETAILS_URL}/${movie_id}?api_key=${import.meta.env.VITE_API_KEY}`
 
@@ -28,53 +29,49 @@ export const MovieDetailsPage = () => {
   }, [movieId])
 
   const handleCloseClick = () => {
-    window.location.href = "/"
+    window.history.back()
   }
 
 
 
   return (
-    <DetailsPage>
-      {movieDetails ? (
-        <div>
-          <TopSection>
-            <CloseButton type="button" onClick={handleCloseClick}><CloseOutlinedIcon /></CloseButton>
-            <BackdropImage src={`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path} `} alt={`${movieDetails.title} image`} />
-          </TopSection>
-          <AllDetailsDiv>
-            <h1>{movieDetails.title}</h1>
-            <MovieInformation>
-              <MarkedRating>{Math.round(movieDetails.vote_average)} / 10 </MarkedRating>
-              <p>{movieDetails.release_date.split('-')[0]}</p>
-              <p>{movieDetails.runtime} min</p>
-            </MovieInformation>
-            <p>{movieDetails.overview}</p>
-            <GenreDiv>
-              <p>Genres:</p>
-              <GenreList>
-                {movieDetails.genres.map((genre, index) => (
-                  <React.Fragment key={genre.id}>
-                    <GenreItem>{genre.name}
-                      {index !== movieDetails.genres.length - 1 && <span>,</span>}
-                    </GenreItem>
-                  </React.Fragment>
-                ))}
-              </GenreList>
-            </GenreDiv>
-          </AllDetailsDiv>
-        </div>
-      ) : (
-        <Loading />
-      )}
-    </DetailsPage>
+    <Page>
+      <div>
+        {movieDetails ? (
+          <div>
+            <TopSection>
+              <CloseButton type="button" onClick={handleCloseClick}><CloseOutlinedIcon /></CloseButton>
+              <BackdropImage src={`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path} `} alt={`${movieDetails.title} image`} />
+            </TopSection>
+            <AllDetailsDiv>
+              <h1>{movieDetails.title}</h1>
+              <MovieInformation>
+                <MarkedRating><p>{Math.round(movieDetails.vote_average)} / 10</p></MarkedRating>
+                <p>{movieDetails.release_date.split('-')[0]}</p>
+                <p>{movieDetails.runtime} min</p>
+              </MovieInformation>
+              <p>{movieDetails.overview}</p>
+              <GenreDiv>
+                <p>Genres:</p>
+                <GenreList>
+                  {movieDetails.genres.map((genre, index) => (
+                    <React.Fragment key={genre.id}>
+                      <GenreItem>{genre.name}
+                        {index !== movieDetails.genres.length - 1 && <span>,</span>}
+                      </GenreItem>
+                    </React.Fragment>
+                  ))}
+                </GenreList>
+              </GenreDiv>
+            </AllDetailsDiv>
+          </div>
+        ) : (
+          <Loading />
+        )}
+      </div>
+    </Page>
   )
 }
-
-const DetailsPage = styled.div`
-h1{
-  font-size: 1.5rem;
-}
-`
 
 const TopSection = styled.div`
   display: flex;
@@ -83,6 +80,10 @@ const TopSection = styled.div`
 
 const BackdropImage = styled.img`
   width: 100vw;
+
+  @media (min-width: 1400px) {
+    height: calc(100vh - 7.25rem);
+  }
 `
 
 const CloseButton = styled.button`
@@ -108,6 +109,18 @@ flex-direction: column;
 padding: 0 1rem;
 gap: 1rem;
 margin-top: 1rem;
+
+@media (min-width: 1200px) {
+   position: absolute;
+   top: 50%;
+    transform: translateY(-50%);
+   left: 3%;
+
+   width: 30%;
+   background-color: #333;
+   padding: 2rem;
+  }
+
 `
 
 const MovieInformation = styled.div`
@@ -124,7 +137,7 @@ const MarkedRating = styled.mark`
 
 const GenreDiv = styled.div`
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 5px;
   color: grey;
   font-size: 12px;
