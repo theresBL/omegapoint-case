@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Loading } from '../Components/Loading'
+
 
 export const HomePage = () => {
   const [mostRecentMovie, setMostRecentMovie] = useState(null)
@@ -30,11 +32,6 @@ export const HomePage = () => {
     fetchMostRecentMovie()
   }, [])
 
-  const handleShowDetailsClick = () => {
-    if (mostRecentMovie) {
-      window.location.href = `/movieDetails/${mostRecentMovie.id}`
-    }
-  }
 
   return (
     <HomePageContainer>
@@ -46,7 +43,7 @@ export const HomePage = () => {
           <HomeImage src={`https://image.tmdb.org/t/p/original${mostRecentMovie.backdrop_path}`} alt={mostRecentMovie.title} />
           <div>
             <HomeTitle>{mostRecentMovie.title}</HomeTitle>
-            <DetailsButton type="button" onClick={handleShowDetailsClick}>View details</DetailsButton>
+            <DetailsButton> <Link to={`/movieDetails/${mostRecentMovie.id}`}>View details</Link></DetailsButton>
           </div>
         </div>
       ) : (
@@ -70,7 +67,7 @@ const HomeTitle = styled.h1`
   color: #fff;
   position: absolute;
   z-index: 11;
-  top: 20%;
+  top: 85%;
   left: 50%;
   transform: translate(-50%, -50%);
 
@@ -107,7 +104,7 @@ const HomeImage = styled.img`
 
 const DetailsButton = styled.button`
   background-color: red;
-  color: white;
+
   border: none;
   border-radius: 20px;
   padding: 8px 10px;
@@ -120,6 +117,11 @@ const DetailsButton = styled.button`
 
   &:hover {
     filter: brightness(50%);
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
   }
 
   @media (min-width: 900px) {
