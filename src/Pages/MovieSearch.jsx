@@ -26,7 +26,7 @@ const SearchForm = ({ onSearch }) => {
         />
         <Input
           type="number"
-          placeholder="Release year (optional)"
+          placeholder="Year (optional)"
           value={year}
           onChange={(e) => setYear(e.target.value)}
         />
@@ -40,7 +40,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
 `
 
 const InputDiv = styled.div`
@@ -165,6 +165,8 @@ flex-direction: column;
 align-items: center;
 gap: 3rem;
 padding: 2rem;
+height: 80vh;
+justify-content: center;
   
 `
 
